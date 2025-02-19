@@ -26,7 +26,7 @@ typedef struct {
 } NeuralNetwork;
 
 // Load batched img data
-void load_data((const char *filename, float *data, int size){
+void load_data(const char *filename, float *data, int size){
     FILE *file = fopen(filename, "rb");
     if (file == NULL){
         fprintf(stderr, "Error: Unable to open file %s\n", filename);
@@ -57,21 +57,21 @@ void load_labels(const char *filename, int *labels, int size){
 // Kaiming init for weights
 void initialize_weights(float *weights, int size){
     float scale = sqrtf(2.0f / size);
-    for (i=0; i<size; i++){
+    for (int i=0; i<size; i++){
         weights[i]  = ((float)rand() / RAND_MAX) * scale - (scale / 2.0f);
     }
 }
 
 // Initialize bias
 void initialize_bias(float *bias, int size){
-    for (i=0; i<size; i++){
+    for (int i=0; i<size; i++){
         bias[i] = 0.0f;
     }
 }
 
 
 // Modify softmax to work with batches
-void softmax(float *x int num_batches, int size){
+void softmax(float *x, int num_batches, int size){
     for (int b=0; b<num_batches; b++){
         float max = x[b * size];
         for (int i=1; i<size; i++){
@@ -96,7 +96,7 @@ void matmul_a_b(float *A, float *B, float *C, int m, int n, int k){
             C[i * k + j] = 0.0f;
 
             for (int l=0; l<n; l++){
-                c[i * k + j] += A[i * n + l] * B[l * k + j];
+                C[i * k + j] += A[i * n + l] * B[l * k + j];
             }
         }
     }
@@ -110,7 +110,7 @@ void matmul_a_bt(float *A, float *B, float *C, int m, int n, int k){
             C[i * k + j] = 0.0f;
 
             for (int l=0; l<n; l++){
-                c[i * k + j] += A[i * n + l] * B[j * n + l];
+                C[i * k + j] += A[i * n + l] * B[j * n + l];
             }
         }
     }
@@ -124,16 +124,16 @@ void matmul_at_b(float *A, float *B, float *C, int m, int n, int k){
             C[i * k + j] = 0.0f;
 
             for (int l=0; l<m; l++){
-                c[i * k + j] += A[l * n + i] * B[l * k + j];
+                C[i * k + j] += A[l * n + i] * B[l * k + j];
             }
         }
     }
-}
+
 
 // ReLU forward
-void relu_forward(float *X, int size){
-    for (int i=0; i<size; i++){
-        X[i] = fmaxf(0.0f, x[i]);
+void relu_forward(float *x, int size) {
+    for (int i = 0; i < size; i++) {
+        x[i] = fmaxf(0.0f, x[i]);
     }
 }
 
@@ -164,9 +164,9 @@ void forward(NeuralNetwork *nn, float *input, float *hidden, float *output, int 
 float cross_entropy_loss(float *output, int *labels, int num_batches){
     float loss = 0.0f;
     for (int b=0; b<num_batches; b++){
-        total_loss += -logf(fmaxf(1e-7f, output[b * OUTPUT_SIZE + labels[b]]));
+        loss += -logf(fmaxf(1e-7f, output[b * OUTPUT_SIZE + labels[b]]));
     }
-    total_loss /= num_batches;
+    loss /= num_batches;
     
 }
 
@@ -252,7 +252,7 @@ void backward(NeuralNetwork *nn, float *input, float *hidden, float *output, int
     matmul_at_b(input, d_ReLU_out, nn->grad_weights1, num_batches, INPUT_SIZE, HIDDEN_SIZE);
     bias_backward(nn->grad_bias1, d_ReLU_out, num_batches, HIDDEN_SIZE);
 
-    free allocated memory
+    //free allocated memory
     free(grad_output);
     free(dX2);
     free(d_ReLU_out);
@@ -301,7 +301,7 @@ void train(NeuralNetwork *nn, float *X_train, int *y_train){
                 int predicted_idx = 0;
                 for (int j=1; j<OUTPUT_SIZE; j++){
                     if (output[i * OUTPUT_SIZE + j] > output[i * OUTPUT_SIZE + predicted_idx]){
-                        predicted_idx = j
+                        predicted_idx = j;
                     }
                 }
                     if (predicted_idx == y_train[start_idx + i]) correct++;
