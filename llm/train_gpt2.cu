@@ -18,3 +18,9 @@
 #include "llmc/rand.h" //defines manual_seed, normal_ (same as torch.normal)
 
 #include "llmc/schedulers.h" // contains lr_scheduler_init, get_learning_rate
+
+#include "llmc/sampler.h" // contains sample softmax and random_f32
+
+#include "llmc/logger.h" // contains logger_init, logger_log_eval, ..._val, ..._train
+
+#include "llmc/mfu.h" // contains get_flops_promised
