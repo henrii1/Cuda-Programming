@@ -24,3 +24,5 @@
 #include "llmc/logger.h" // contains logger_init, logger_log_eval, ..._val, ..._train
 
 #include "llmc/mfu.h" // contains get_flops_promised
+
+#include "llmc/outlier_detector.h"  // contains OutlierDetector, init_detector, update_detector
