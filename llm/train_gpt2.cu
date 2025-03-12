@@ -26,3 +26,8 @@
 #include "llmc/mfu.h" // contains get_flops_promised
 
 #include "llmc/outlier_detector.h"  // contains OutlierDetector, init_detector, update_detector
+
+/* GPU Utilities*/
+#include "llmc/cuda_common.h" // contains WARP_SIZE, MAX_1024_THREADS_BLOCKS, CEIL_DIV, cudaCheck, PRECISION_MODE, NVTX_RANGE_FN
+
+#include 
