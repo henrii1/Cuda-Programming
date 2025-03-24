@@ -30,4 +30,4 @@
 /* GPU Utilities*/
 #include "llmc/cuda_common.h" // contains WARP_SIZE, MAX_1024_THREADS_BLOCKS, CEIL_DIV, cudaCheck, PRECISION_MODE, NVTX_RANGE_FN
 
-#include 
+#include "llmc/cuda_utils.cuh" // packed128, f128, x128, warpReduceSum, warpReduceMax, blockReduce, copy_and_cast_kernel, cudaMallocConditionallyManaged.
