@@ -34,5 +34,6 @@
 
 #include "llmc/cublas_common.h"  //  CUBLAS_LOWP, cublasCheck, cublast_workspace_size, cublaslt_workspace cublas_compute, cublaslt_handle, cublas_handle
 
-#include "llmc/encoder.cuh"  //layernorm_forward, residual_forward, fused_residual_forward5, layernorm_backward
+#include "llmc/encoder.cuh"  // encoder_forward, encoder_backward
 
+#include "llmc/layernorm.cuh"  // layernorm_forward, residual_forward, fused_residual_forward5, layernorm_backward
