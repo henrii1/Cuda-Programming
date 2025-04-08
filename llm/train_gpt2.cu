@@ -37,3 +37,5 @@
 #include "llmc/encoder.cuh"  // encoder_forward, encoder_backward
 
 #include "llmc/layernorm.cuh"  // layernorm_forward, residual_forward, fused_residual_forward5, layernorm_backward
+
+#include "llmc/matmul.cuh" // matmul_cublaslt, matmul_forward matmul_backward, gelu_forward, gelu_backward_inplace
