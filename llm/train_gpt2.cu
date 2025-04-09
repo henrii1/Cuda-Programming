@@ -39,3 +39,14 @@
 #include "llmc/layernorm.cuh"  // layernorm_forward, residual_forward, fused_residual_forward5, layernorm_backward
 
 #include "llmc/matmul.cuh" // matmul_cublaslt, matmul_forward matmul_backward, gelu_forward, gelu_backward_inplace
+
+#ifdef ENABLE_CUDNN
+
+#include "llmc/cudnn_att.h"  // create_cudnn, destroy_cudnn, attention_forward_cudnn, attention_backward_cudnn
+
+#else
+
+// not yet included
+#include "llmc/attention.cuh" // attention_forward, attention_backward
+
+#endif
