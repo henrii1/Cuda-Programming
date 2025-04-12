@@ -46,7 +46,14 @@
 
 #else
 
-// not yet included
 #include "llmc/attention.cuh" // attention_forward, attention_backward
 
 #endif
+
+#include "llmc/zero.cuh" // Multi-GPU support
+
+#include "llmc/fused_classifier.cuh" // fused_classifier,
+
+#include "llmc/global_norm.cuh" // global_norm_squared
+
+#include "llmc/adamw.cuh" // adamw_kernel13
